@@ -1,0 +1,22 @@
+name: Compile 
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build-resume:
+    runs-on: ubuntu-latest
+    name: Create PDF document
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Convert to pdf
+      id: convert-to-pdf
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: main.tex
+    - name: Store PDF
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: main.pdf
+        path: main.pdf
+        
